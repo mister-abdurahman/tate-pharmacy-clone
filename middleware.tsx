@@ -7,5 +7,5 @@ import { auth } from "./app/_lib/auth";
 export const middleware = auth;
 
 export const config = {
-  matcher: ["/account"], //the code in our middleware only works for these routes.
+  matcher: ["/profile"], //the code in our middleware only works for these routes.
 };

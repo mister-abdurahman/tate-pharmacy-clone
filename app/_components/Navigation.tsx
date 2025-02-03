@@ -44,7 +44,7 @@ export default async function Navigation() {
         <li className="min-w-max">
           {session?.user?.image ? (
             <a
-              href="/account"
+              href="/profile"
               className="hover:text-accent-400 transition-colors flex gap-4 items-center min-w-max"
             >
               <figure className="h-12 rounded-full aspect-square relative overflow-clip">
@@ -60,7 +60,7 @@ export default async function Navigation() {
             </a>
           ) : (
             <a
-              href="/account"
+              href="/profile"
               className="hover:text-accent-400 transition-colors"
             >
               Guest area
@@ -90,7 +90,7 @@ export default async function Navigation() {
         <li>
           {session?.user?.image ? (
             <Link
-              href="/account"
+              href="/profile"
               className="hover:text-accent-400 transition-colors flex gap-4 items-center"
             >
               <figure className="h-12 rounded-full aspect-square relative overflow-clip">
@@ -106,7 +106,7 @@ export default async function Navigation() {
             </Link>
           ) : (
             <Link
-              href="/account"
+              href="/profile"
               className="hover:text-accent-400 transition-colors"
             >
               Guest area
