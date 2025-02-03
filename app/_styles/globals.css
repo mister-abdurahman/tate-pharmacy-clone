@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid theme("colors.primary.900");
+    border-right-color: theme("colors.primary.200");
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid theme("colors.primary.200");
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+/* For data picker */
+.rdp {
+  --rdp-cell-size: 32px !important;
+  --rdp-accent-color: theme("colors.accent.500") !important;
+  --rdp-background-color: theme("colors.accent.600") !important;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: 640px) {
+  .rdp {
+    --rdp-cell-size: 22px !important;
+  }
+}
+
+.menubar::before,
+.menubar::after {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2px;
+  background-color: black;
+  transition: all 0.3s;
+}
+.menubar::before {
+  bottom: 0.4rem;
+}
+.menubar::after {
+  right: 0px;
+  top: 0.4rem;
+}
+
+.checkbox:checked ~ .menubar_parent > .menubar {
+  background-color: transparent;
+}
+.checkbox:checked ~ .menubar_parent > .menubar::before {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+.checkbox:checked ~ .menubar_parent > .menubar::after {
+  top: 0;
+  transform: rotate(45deg);
+}
+.checkbox:checked ~ .menubar_bg {
+  position: fixed;
+  transform: scale(100);
+}
+.checkbox:checked ~ .menubar_list {
+  right: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+}
