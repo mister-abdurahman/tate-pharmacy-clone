@@ -44,7 +44,7 @@ export interface sessionType extends Session {
 
 export async function signInAction() {
   await signIn("google", {
-    redirectTo: "/account",
+    redirectTo: "/profile",
   });
 }
 export async function signOutAction() {
