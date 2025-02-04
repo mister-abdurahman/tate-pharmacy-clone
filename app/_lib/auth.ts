@@ -30,6 +30,7 @@ const authConfig: any = {
   ],
   callbacks: {
     authorized({ auth, request }: { auth: { user: string }; request: any }) {
+      console.log("auth", auth);
       return !!auth?.user; //!! converts condition to a boolean.
     },
     async signIn({ user, account, profile }: signinType) {
