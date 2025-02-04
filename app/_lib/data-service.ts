@@ -2,9 +2,7 @@ import { supabase } from "@/app/_lib/supabase";
 import { IProfile } from "@/app/_lib/types";
 
 export async function createUser(newUser: any) {
-  const { data, error } = await supabase
-    .from("user_profiles")
-    .insert([newUser]);
+  const { data, error } = await supabase.from("customers").insert([newUser]);
 
   if (error) {
     console.error(error);
@@ -16,7 +14,7 @@ export async function createUser(newUser: any) {
 
 export async function getUser(email: string) {
   const { data, error } = await supabase
-    .from("user_profiles")
+    .from("customers")
     .select("*")
     .eq("email", email)
     .single();
@@ -28,7 +26,7 @@ export async function getUser(email: string) {
 export async function getProfileById(id: string) {
   try {
     const { data, error } = await supabase
-      .from("user_profiles")
+      .from("customers")
       .select("*")
       .eq("id", id)
       .single();
