@@ -1,15 +1,22 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { pages } from "next/dist/build/templates/app-page";
-import { createGuest, getGuest } from "./data-service";
+import { createUser, getUser } from "./data-service";
 import getEnvVariable from "./getEnv";
 
 interface sessionType {
-  session: { user: { guestId: string; email: string } };
+  session: {
+    user: {
+      UserId: string;
+      email: string;
+      firstName: string;
+      lastName: string;
+    };
+  };
   user: string;
 }
 interface signinType {
-  user: { guestId: string; email: string; name: string };
+  user: { UserId: string; email: string; name: string };
   account: string;
   profile: string;
 }
@@ -27,9 +34,13 @@ const authConfig: any = {
     },
     async signIn({ user, account, profile }: signinType) {
       try {
-        const guestExists = await getGuest(user.email);
-        if (!guestExists) {
-          await createGuest({ email: user.email, fullName: user.name });
+        const UserExists = await getUser(user.email);
+        if (!UserExists) {
+          await createUser({
+            email: user.email,
+            firstName: user.name.split(" ").at(0),
+            lastName: user.name.split(" ").at(1),
+          });
         }
         return true;
       } catch {
@@ -37,8 +48,10 @@ const authConfig: any = {
       }
     },
     async session({ session, user }: sessionType) {
-      const guest = await getGuest(session?.user?.email);
-      session.user.guestId = guest.id;
+      const User = await getUser(session?.user?.email);
+      session.user.UserId = User.id;
+      session.user.firstName = User.firstName;
+      session.user.lastName = User.lastName;
       return session;
     },
   },
